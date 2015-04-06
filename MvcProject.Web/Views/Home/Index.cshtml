@@ -1,0 +1,27 @@
+﻿@model IList<Log>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<table border="1">
+    <tr>
+        <th>ErrorId</th>
+        <th>Host</th>
+        <th>TimeUtc</th>
+    </tr>
+    @if (Model != null && Model.Count > 0)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ErrorId</td>
+                <td>@item.Host</td>
+                <td>@item.TimeUtc</td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>查無資料</tr>
+    }
+</table>
