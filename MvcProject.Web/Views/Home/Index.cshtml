@@ -3,7 +3,11 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<table border="1">
+@section scripts{
+    <link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+}
+<table class="table table-striped">
     <tr>
         <th>ErrorId</th>
         <th>Host</th>
