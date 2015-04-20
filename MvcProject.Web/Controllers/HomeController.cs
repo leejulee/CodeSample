@@ -1,4 +1,5 @@
-﻿using MVCProject.Logic;
+﻿using MvcProject.Web.App_GlobalResources;
+using MVCProject.Logic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,5 @@ namespace MvcProject.Web.Controllers
         {
             return View(MVCProjectBusinessFactory.LogBusiness.GetAllData());
         }
-
     }
 }
