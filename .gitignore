@@ -187,3 +187,5 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
+/MvcProject.Web/Content/EditorImages/images
+/MvcProject.Web/Content/EditorImages/_thumbs/Images
