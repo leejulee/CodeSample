@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "HtmlEditor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts{
+    <script src="~/Content/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript">
+        CKEDITOR.replace('UserEditor');
+    </script>
+}
+@using (Html.BeginForm())
+{
+    @Html.TextArea("UserEditor")
+}
