@@ -1,0 +1,94 @@
+﻿<#@ template  language="C#"    debug="true" hostspecific="True"#> 
+//  導入MultipleOutputHelper.ttinclude文件
+<#@ include file="...\MultipleOutputHelper.ttinclude" #>
+<#@ import namespace="System.IO"#>
+<#@ import namespace="System"#>
+<#@ import namespace="System.Configuration"#>   
+<#@ assembly name="System.Data" #>
+<#@ assembly name="System.xml" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Data.SqlClient" #>
+<#@ import namespace="System.Data" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Net" #>
+<#@ import namespace="System.Data" #>					 `
+	<#
+		//修改connection string
+		string connectionString = @"Data Source=R930\SQLEXPRESS;Application Name=AdventureWorks2012;Initial Catalog=AdventureWorks2012;Integrated Security=True;"; 
+		SqlConnection conn = new SqlConnection(connectionString); 
+		conn.Open(); 
+		
+		DataTable schema = conn.GetSchema("Tables");
+	
+		string selectQuery = @"select * from  @tableName; SELECT objname,value   
+          FROM fn_listextendedproperty (NULL, 'schema', 'dbo', 'table', '@tableName', 'column', default)   
+          WHERE name='MS_Description' and objtype='COLUMN'"; 
+		SqlCommand command = new SqlCommand(selectQuery,conn); 
+		SqlDataAdapter ad = new SqlDataAdapter(command); 
+		DataSet ds = new DataSet(); 
+		DataSet ds2 = new DataSet();
+
+		var manager = Manager.Create(Host, GenerationEnvironment);  
+		foreach(System.Data.DataRow row in schema.Rows) 
+		{ 				
+			//row["Table_schema"] //demo table DatabaseLog
+				if (row["TABLE_NAME"].ToString() != "DatabaseLog")
+				{
+					   continue;
+				}
+				manager.StartNewFile(row["TABLE_NAME"].ToString()+".cs");
+#>using System;
+using System.Collections.Generic;
+using System.Linq; 
+using System.Text;
+
+namespace FincSystem.Models
+{ 
+	public class <#= row["TABLE_NAME"].ToString() #>  
+	{
+		<#       
+		ds.Tables.Clear();					      
+		command.CommandText = selectQuery.Replace("@tableName",row["TABLE_NAME"].ToString()); 
+		ad.FillSchema(ds, SchemaType.Mapped, row["TABLE_NAME"].ToString());
+		ad.Fill(ds2);
+
+		IEnumerable<DataRow> rows = ds2.Tables[1].Rows.Cast<DataRow>();
+
+		foreach (DataColumn dc in ds.Tables[0].Columns)
+		{
+			string s = "";
+            try
+            {
+                s = Convert.ToString(rows.FirstOrDefault(x => x["objname"].ToString() == dc.ColumnName)["value"]);
+            }
+            catch (Exception) { }
+			
+			if (dc.AllowDBNull && dc.DataType.Name != "String")
+			{
+			if(!string.IsNullOrWhiteSpace(s)){
+		#>
+		/// <summary>
+		/// <#= s	#>
+		/// </summary><#}#>
+		public Nullable<<#=dc.DataType.Name #>> <#= dc.ColumnName #> { get; set; } 
+		<#	
+			}else
+			{
+			if(!string.IsNullOrWhiteSpace(s)){
+		#>
+		/// <summary>
+		/// <#= s	#>
+		/// </summary><#}#>
+		public <#= dc.DataType.Name #> <#= dc.ColumnName #> { get; set; }                                      
+		<#	
+			}
+        }
+		#>         
+	} 
+}
+			
+	<# // 結束輸出文件
+	   manager.EndBlock();
+	} // 執行編譯
+	   manager.Process(true);  
+	#> 

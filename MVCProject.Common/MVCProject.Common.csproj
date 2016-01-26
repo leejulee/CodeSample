@@ -56,12 +56,22 @@
     <Compile Include="Enums\OrderEnum.cs" />
     <Compile Include="Extensions\ObjectExtension.cs" />
     <Compile Include="Helpers\UnityHelper.cs" />
+    <Compile Include="Models\DatabaseLog.cs">
+      <DependentUpon>ModelsGenerator.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Log.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Models\ModelsGenerator.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ModelsGenerator.cs</LastGenOutput>
+    </None>
     <None Include="MultipleOutputHelper.ttinclude" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
