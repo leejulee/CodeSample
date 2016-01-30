@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EnterpriseDAAB.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EnterpriseDAAB.Common.1.0.0.0\lib\net40\EnterpriseDAAB.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
@@ -49,11 +53,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attributes\BaseMappingAttribute.cs" />
-    <Compile Include="Attributes\DBMappingAttribute.cs" />
-    <Compile Include="Attributes\IgnoreMappingAttribute.cs" />
-    <Compile Include="Attributes\PrimaryKeyMappingAttribute.cs" />
-    <Compile Include="Enums\OrderEnum.cs" />
     <Compile Include="Extensions\ObjectExtension.cs" />
     <Compile Include="Helpers\UnityHelper.cs" />
     <Compile Include="Models\DatabaseLog.cs">
@@ -72,6 +71,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Enums\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

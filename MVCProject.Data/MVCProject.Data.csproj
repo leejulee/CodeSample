@@ -31,6 +31,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EnterpriseDAAB.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EnterpriseDAAB.Common.1.0.0.0\lib\net40\EnterpriseDAAB.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EnterpriseDAAB.Extensions, Version=1.0.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EnterpriseDAAB.Extensions.1.0.0.2\lib\net40\EnterpriseDAAB.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=5.0.505.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EnterpriseLibrary.Common.5.0.505.0\lib\NET35\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
@@ -67,19 +75,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\IBaseRepository.cs" />
     <Compile Include="Interfaces\ILogRepository.cs" />
-    <Compile Include="Models\PropertyMappingInfo.cs" />
-    <Compile Include="Models\TypeMappingInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\BaseRepository.cs" />
     <Compile Include="Repositories\MVCProjectRepositoryFactory.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>MVCProjectRepositoryFactory.tt</DependentUpon>
     </Compile>
     <Compile Include="Repositories\LogRepository.cs" />
-    <Compile Include="RowMappers\CommonRowMapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MVCProject.Common\MVCProject.Common.csproj">
