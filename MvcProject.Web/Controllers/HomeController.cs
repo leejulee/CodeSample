@@ -29,5 +29,16 @@ namespace MvcProject.Web.Controllers
             ViewBag.UserEditor = Sanitizer.GetSafeHtmlFragment(UserEditor);
             return View();
         }
+
+        public ActionResult DemoAngular()
+        {
+            return View();
+        }
+
+
+        public ActionResult GetMockData()
+        {
+            return Json(new { name = "one" }, JsonRequestBehavior.AllowGet);
+        }
     }
 }

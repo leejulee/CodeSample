@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "DemoAngular";
+    Layout = "~/Views/Shared/_LayoutAngular.cshtml";
+}
+@section scripts{
+    <script src="~/Scripts/DemoTypeScript/DemoAngular.js"></script>
+}
+<div ng-controller="myCtrl">
+    <h2>{{title}}</h2>
+    <label>Data: {{data}} => {{data|eTon}}</label>
+</div>
+
